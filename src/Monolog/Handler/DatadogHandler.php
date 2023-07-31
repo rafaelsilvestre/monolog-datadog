@@ -72,6 +72,7 @@ class DatadogHandler extends AbstractProcessingHandler
     protected function write(LogRecord $record): void
     {
         $this->send($record['formatted']);
+    
     }
 
     /**
