@@ -81,7 +81,7 @@ class DatadogHandler extends AbstractProcessingHandler
      * Send request to @link https://http-intake.logs.datadoghq.com on send action.
      * @param array $record
      */
-    protected function send(array $record): void
+    protected function send($record): void
     {
         $headers = ['Content-Type:application/json'];
 
