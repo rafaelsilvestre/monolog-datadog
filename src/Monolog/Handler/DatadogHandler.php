@@ -10,6 +10,8 @@ use Exception;
 use Monolog\Handler\Curl\Util;
 
 use Monolog\Formatter\JsonFormatter;
+use Monolog\Formatter\FormatterInterface;
+use Monolog\LogRecord;
 
 /**
  * Sends logs to Datadog Logs using Curl integrations
@@ -51,7 +53,7 @@ class DatadogHandler extends AbstractProcessingHandler
     public function __construct(
         string $apiKey,
         array $attributes = [],
-        $level = Logger::DEBUG,
+               $level = Logger::DEBUG,
         bool $bubble = true
     ) {
         if (!extension_loaded('curl')) {
@@ -67,7 +69,7 @@ class DatadogHandler extends AbstractProcessingHandler
     /**
      * Handles a log record
      */
-    protected function write($record)
+    protected function write(LogRecord $record): void
     {
         $this->send($record['formatted']);
     }
@@ -147,7 +149,7 @@ class DatadogHandler extends AbstractProcessingHandler
      *
      * @return JsonFormatter
      */
-    protected function getDefaultFormatter()
+    protected function getDefaultFormatter(): FormatterInterface
     {
         return new JsonFormatter();
     }
